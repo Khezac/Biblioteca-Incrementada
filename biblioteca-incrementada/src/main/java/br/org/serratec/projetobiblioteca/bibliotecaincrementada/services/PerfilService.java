@@ -4,8 +4,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.org.serratec.biblioteca.entities.Perfil;
-import br.org.serratec.biblioteca.repositories.PerfilRepository;
+import br.org.serratec.projetobiblioteca.bibliotecaincrementada.entities.Perfil;
+import br.org.serratec.projetobiblioteca.bibliotecaincrementada.repositories.PerfilRepository;
 
 @Service
 public class PerfilService {

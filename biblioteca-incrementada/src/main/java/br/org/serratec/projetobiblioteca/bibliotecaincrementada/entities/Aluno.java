@@ -1,6 +1,7 @@
 package br.org.serratec.projetobiblioteca.bibliotecaincrementada.entities;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -43,7 +44,7 @@ public class Aluno {
 	@Column(name = "cidade")
 	private String cidade;
 	
-	@OneToMany(mappedBy = "emprestimo")
+	@OneToMany(mappedBy = "aluno")
 	private List<Emprestimo> emprestimo;
 
 	public Aluno() {

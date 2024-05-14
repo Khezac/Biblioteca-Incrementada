@@ -53,7 +53,7 @@ public class Emprestimo {
 		return aluno.getAluno_matricula();
 	}
 
-	public void setAluno_matricula(Integer aluno_matricula) {
+	public void setAluno_matricula(Aluno aluno_matricula) {
 		this.aluno = aluno_matricula;
 	}
 

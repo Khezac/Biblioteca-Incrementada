@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.org.serratec.biblioteca.entities.Perfil;
-import br.org.serratec.biblioteca.services.PerfilService;
+import br.org.serratec.projetobiblioteca.bibliotecaincrementada.entities.Perfil;
+import br.org.serratec.projetobiblioteca.bibliotecaincrementada.services.PerfilService;
 
 @RestController
 @RequestMapping("/perfil")
