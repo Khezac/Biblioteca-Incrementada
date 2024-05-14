@@ -1,4 +1,3 @@
-
 -- public.usuario definition
 
 -- Drop table
