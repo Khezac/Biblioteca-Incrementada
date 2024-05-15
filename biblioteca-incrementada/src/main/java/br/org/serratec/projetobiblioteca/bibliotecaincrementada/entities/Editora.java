@@ -34,9 +34,7 @@ public class Editora {
 	@OneToMany(mappedBy = "editora")
 	private List<Livro> livros;
 	
-	
 	public Editora() {
-		
 	}
 
 	public Editora( String nome, String imagem_nome, String imagem_filename, String imagem_url,
