@@ -26,12 +26,20 @@ public class AlunoController {
 	
 	@GetMapping
 	public ResponseEntity<List<Aluno>> findAll() {
-		return new ResponseEntity<>(alunoService.findAll(),HttpStatus.OK);
+		List<Aluno> aluno = alunoService.findAll();
+		if(aluno != null)
+			return new ResponseEntity<>(alunoService.findAll(),HttpStatus.OK);
+		else
+			return new ResponseEntity<>(alunoService.findAll(),HttpStatus.NOT_FOUND);
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Aluno> findById(@PathVariable Integer id) { 
-		return new ResponseEntity<>(HttpStatus.OK);
+		Aluno aluno = alunoService.findById(id);
+		if(aluno != null)
+			return new ResponseEntity<>(alunoService.findById(id),HttpStatus.OK);
+		else
+			return new ResponseEntity<>(alunoService.findById(id),HttpStatus.NOT_FOUND);
 	}
 
 	@PostMapping

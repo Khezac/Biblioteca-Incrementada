@@ -14,11 +14,29 @@ public class AlunoService {
 	@Autowired
 	AlunoRepository alunoRepository;
 	
-	public List<Aluno> findAll(){
-		return alunoRepository.findAll();
+	public List<Aluno> findAll() {
+		List<Aluno> listaAlunos = alunoRepository.findAll();
+		if(listaAlunos != null) {
+			try {
+				alunoRepository.findAll();
+				return listaAlunos;
+			} catch(Exception e){
+				System.out.println(e);
+			}
+		}
+		return listaAlunos;
 	}
 	public Aluno findById(Integer id) { 
-		return alunoRepository.findById(id).orElse(null); 
+		Aluno aluno = alunoRepository.findById(id).orElse(null);
+		if(aluno != null) {
+			try {
+				alunoRepository.findById(id);
+				return aluno;
+			} catch(Exception e){
+				System.out.println(e);
+			}
+		}
+		return aluno; 
 	}
 
 	public Aluno save(Aluno aluno) { 
