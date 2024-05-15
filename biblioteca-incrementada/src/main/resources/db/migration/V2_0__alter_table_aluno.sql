@@ -1,0 +1,1 @@
+ALTER TABLE aluno RENAME COLUMN dat_anascimento TO data_nascimento;
