@@ -2,7 +2,6 @@ package br.org.serratec.projetobiblioteca.bibliotecaincrementada.entities;
 
 import java.time.LocalDate;
 
-import br.org.serratec.biblioteca.entities.Perfil;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
