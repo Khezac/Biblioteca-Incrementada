@@ -35,7 +35,7 @@ public class Editora {
 	private List<Livro> livros;
 	
 	
-	public Editora editora() {
+	public Editora() {
 		
 	}
 

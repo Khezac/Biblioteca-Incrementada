@@ -31,7 +31,12 @@ public class PerfilController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Perfil> findById(@PathVariable Integer id) { 
-		return new ResponseEntity<>(HttpStatus.OK);
+		Perfil perfilId = perfilService.findById(id);
+		
+		if(perfilId == null) {
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} 
+		return new ResponseEntity<>(perfilId,HttpStatus.OK);
 	}
 
 	@PostMapping
@@ -46,6 +51,12 @@ public class PerfilController {
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Perfil> deletaPerfil(@PathVariable Integer id) {
-		return new ResponseEntity<>(HttpStatus.OK);
+		Perfil perfilDeletado = perfilService.findById(id);
+		
+		if(perfilDeletado == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+			perfilService.delete(id);
+			return new ResponseEntity<>(perfilDeletado,HttpStatus.OK);
 	}
 }

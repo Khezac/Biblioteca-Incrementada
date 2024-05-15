@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.org.serratec.projetobiblioteca.bibliotecaincrementada.entities.Perfil;
 import br.org.serratec.projetobiblioteca.bibliotecaincrementada.entities.Usuario;
 import br.org.serratec.projetobiblioteca.bibliotecaincrementada.services.UsuarioService;
 
@@ -32,7 +33,11 @@ public class UsuarioController {
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Usuario> findById(@PathVariable Integer id) { 
-		return new ResponseEntity<>(HttpStatus.OK);
+		Usuario UserId = usuarioService.findById(id);
+		if(UserId == null) {
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} 
+		return new ResponseEntity<>(UserId,HttpStatus.OK);
 	}
 	
 	@PostMapping
@@ -47,7 +52,13 @@ public class UsuarioController {
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Usuario> delete(@PathVariable Integer id) {
-		return new ResponseEntity<>(usuarioService.deleteById(id), HttpStatus.OK);
-	}	
-	
+		Usuario usuarioDeletado = usuarioService.findById(id);
+		
+		if(usuarioDeletado == null) {
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} else {
+			usuarioService.deleteById(id);
+		}
+		return new ResponseEntity<>(usuarioDeletado,HttpStatus.OK);
+	}
 }

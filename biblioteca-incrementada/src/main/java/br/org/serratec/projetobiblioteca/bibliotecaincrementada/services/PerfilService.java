@@ -32,7 +32,8 @@ public class PerfilService {
 	
 	public Perfil delete(Integer id) {
 		Perfil perfilDeletado = perfilRepository.findById(id).orElse(null);
-		if (perfilDeletado != null) {
+			
+		if(perfilDeletado != null) {
 			try {
 				perfilRepository.deleteById(id);
 				return perfilDeletado;
@@ -41,7 +42,8 @@ public class PerfilService {
 				System.out.println(e);
 			}
 		}
-		return perfilDeletado;
+		
+			return perfilDeletado;
 		
 	}
 	

@@ -23,8 +23,8 @@ public class Aluno {
 	@Column(name = "nome")
 	private String nome;
 
-	@Column(name = "data_nascimento")
-	private LocalDate data_nascimento;
+	@Column(name = "dat_anascimento")
+	private LocalDate dat_anascimento;
 
 	@Column(name = "cpf")
 	private String cpf;
@@ -67,12 +67,12 @@ public class Aluno {
 		this.nome = nome;
 	}
 
-	public LocalDate getData_nascimento() {
-		return data_nascimento;
+	public LocalDate getdat_anascimento() {
+		return dat_anascimento;
 	}
 
-	public void setData_nascimento(LocalDate data_nascimento) {
-		this.data_nascimento = data_nascimento;
+	public void setdat_anascimento(LocalDate dat_anascimento) {
+		this.dat_anascimento = dat_anascimento;
 	}
 
 	public String getCpf() {
