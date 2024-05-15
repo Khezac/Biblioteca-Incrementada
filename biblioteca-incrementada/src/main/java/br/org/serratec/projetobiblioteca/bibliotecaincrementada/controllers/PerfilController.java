@@ -20,43 +20,43 @@ import br.org.serratec.projetobiblioteca.bibliotecaincrementada.services.PerfilS
 @RestController
 @RequestMapping("/perfil")
 public class PerfilController {
-	
+
 	@Autowired
 	PerfilService perfilService;
-	
+
 	@GetMapping
 	public ResponseEntity<List<Perfil>> findAll() {
-		return new ResponseEntity<>(perfilService.findAll(),HttpStatus.OK);
+		return new ResponseEntity<>(perfilService.findAll(), HttpStatus.OK);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Perfil> findById(@PathVariable Integer id) { 
+	public ResponseEntity<Perfil> findById(@PathVariable Integer id) {
 		Perfil perfilId = perfilService.findById(id);
-		
-		if(perfilId == null) {
-		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		} 
-		return new ResponseEntity<>(perfilId,HttpStatus.OK);
+
+		if (perfilId == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(perfilId, HttpStatus.OK);
 	}
 
 	@PostMapping
 	public ResponseEntity<Perfil> save(@RequestBody Perfil perfil) {
-		return new ResponseEntity<>(perfilService.save(perfil), HttpStatus.CREATED) ;
+		return new ResponseEntity<>(perfilService.save(perfil), HttpStatus.CREATED);
 	}
-	
+
 	@PutMapping
-	public ResponseEntity<Perfil>update(@RequestBody Perfil perfil){
-        return new ResponseEntity<>(perfilService.update(perfil), HttpStatus.OK);
-    }
-	
+	public ResponseEntity<Perfil> update(@RequestBody Perfil perfil) {
+		return new ResponseEntity<>(perfilService.update(perfil), HttpStatus.OK);
+	}
+
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Perfil> deletaPerfil(@PathVariable Integer id) {
 		Perfil perfilDeletado = perfilService.findById(id);
-		
-		if(perfilDeletado == null) {
+
+		if (perfilDeletado == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-			perfilService.delete(id);
-			return new ResponseEntity<>(perfilDeletado,HttpStatus.OK);
+		perfilService.delete(id);
+		return new ResponseEntity<>(perfilDeletado, HttpStatus.OK);
 	}
 }

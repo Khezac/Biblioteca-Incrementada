@@ -4,6 +4,7 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -31,7 +32,7 @@ public class Editora {
 	@Column(name = "imagem_url")
 	private String imagem_url;
 	
-	@OneToMany(mappedBy = "editora")
+	@OneToMany(mappedBy = "editora", fetch = FetchType.EAGER)
 	private List<Livro> livros;
 	
 	public Editora() {

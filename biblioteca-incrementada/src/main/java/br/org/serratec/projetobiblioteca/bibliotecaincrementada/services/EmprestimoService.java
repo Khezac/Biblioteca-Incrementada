@@ -8,54 +8,46 @@ import org.springframework.stereotype.Service;
 import br.org.serratec.projetobiblioteca.bibliotecaincrementada.entities.Emprestimo;
 import br.org.serratec.projetobiblioteca.bibliotecaincrementada.repositories.EmprestimoRepository;
 
-
 @Service
 public class EmprestimoService {
-	
+
 	@Autowired
 	EmprestimoRepository emprestimoRepository;
-	
 
 	public List<Emprestimo> findAll() {
 		return emprestimoRepository.findAll();
 	}
 
-	public Emprestimo findById(Integer id) { 
-		return emprestimoRepository.findById(id).orElse(null); 
+	public Emprestimo findById(Integer id) {
+		return emprestimoRepository.findById(id).orElse(null);
 	}
 
-	public Emprestimo save(Emprestimo emprestimo) { 
+	public Emprestimo save(Emprestimo emprestimo) {
 		return emprestimoRepository.save(emprestimo);
 	}
 
-	public Emprestimo update(Emprestimo emprestimo) { 
+	public Emprestimo update(Emprestimo emprestimo) {
 		return emprestimoRepository.save(emprestimo);
 	}
 
-	public Emprestimo deleteById(Integer id) {
+	public Emprestimo delete(Integer id) {
 		Emprestimo emprestimoDeletado = emprestimoRepository.findById(id).orElse(null);
-		if(emprestimoDeletado != null) {
+
+		if (emprestimoDeletado != null) {
 			try {
 				emprestimoRepository.deleteById(id);
 				return emprestimoDeletado;
-			} catch(Exception e) {
+
+			} catch (Exception e) {
 				System.out.println(e);
 			}
 		}
+
 		return emprestimoDeletado;
 	}
 	
-	public Emprestimo deleteUsuario(Emprestimo emprestimo) {
-		Emprestimo emprestimoDeletado = emprestimoRepository.findById(emprestimo.getEmprestimo_id()).orElse(null);
-		if(emprestimoDeletado != null) {
-			try {
-				emprestimoRepository.delete(emprestimo);
-				return emprestimoDeletado;
-			} catch(Exception e) {
-				System.out.println(e);
-			}
-		}
-		return emprestimoDeletado;
+	public long count() {
+		return emprestimoRepository.count();
 	}
-}
 
+}

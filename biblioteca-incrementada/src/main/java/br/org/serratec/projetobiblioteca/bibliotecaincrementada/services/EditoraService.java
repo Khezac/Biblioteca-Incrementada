@@ -30,16 +30,16 @@ public class EditoraService {
 	}
 
 	public Editora deleteById(Integer id) {
-		Editora EditoraDeletada = editoraRepository.findById(id).orElse(null);
-		if(EditoraDeletada != null) {
+		Editora editoraDeletada = editoraRepository.findById(id).orElse(null);
+		if(editoraDeletada != null) {
 			try {
 				editoraRepository.deleteById(id);
-				return EditoraDeletada;
+				return editoraDeletada;
 			} catch(Exception e) {
 				System.out.println(e);
 			}
 		}
-		return EditoraDeletada;
+		return editoraDeletada;
 	}
 
 }
