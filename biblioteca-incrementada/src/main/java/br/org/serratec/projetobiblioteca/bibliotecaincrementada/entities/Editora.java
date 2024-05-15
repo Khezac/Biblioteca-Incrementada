@@ -2,6 +2,9 @@ package br.org.serratec.projetobiblioteca.bibliotecaincrementada.entities;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -13,6 +16,11 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "editora")
+@JsonIdentityInfo(
+		generator = ObjectIdGenerators.PropertyGenerator.class,
+		property = "editora_id",
+		scope = Editora.class
+)
 public class Editora {
 	
 	@Id

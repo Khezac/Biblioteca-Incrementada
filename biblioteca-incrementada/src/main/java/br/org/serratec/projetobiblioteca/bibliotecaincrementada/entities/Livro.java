@@ -2,6 +2,9 @@ package br.org.serratec.projetobiblioteca.bibliotecaincrementada.entities;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,6 +16,11 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "livro")
+@JsonIdentityInfo(
+		generator = ObjectIdGenerators.PropertyGenerator.class,
+		property = "livro_id",
+		scope = Livro.class
+)
 public class Livro {
 	
 	@Id

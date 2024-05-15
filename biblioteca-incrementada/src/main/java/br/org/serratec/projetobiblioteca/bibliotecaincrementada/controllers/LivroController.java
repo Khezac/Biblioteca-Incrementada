@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.org.serratec.projetobiblioteca.bibliotecaincrementada.entities.Livro;
+import br.org.serratec.projetobiblioteca.bibliotecaincrementada.entities.Perfil;
 import br.org.serratec.projetobiblioteca.bibliotecaincrementada.services.LivroService;
 
 @RestController
@@ -30,8 +31,13 @@ public class LivroController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Livro> findById(@PathVariable Integer id) { 
-		return new ResponseEntity<>(HttpStatus.OK);
+	public ResponseEntity<Livro> findById(@PathVariable Integer id) {
+		Livro livroId = livroService.findById(id);
+
+		if (livroId == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(livroId, HttpStatus.OK);
 	}
 
 	@PostMapping
@@ -39,14 +45,24 @@ public class LivroController {
 		return new ResponseEntity<>(livroService.save(livro), HttpStatus.CREATED) ;
 	}
 	
-	@PutMapping
-	public ResponseEntity<Livro>update(@RequestBody Livro livro){
-        return new ResponseEntity<>(livroService.update(livro), HttpStatus.OK);
+	@PutMapping("/{id}")
+	public ResponseEntity<Livro>update(@PathVariable Integer id, @RequestBody Livro novoLivro){
+		Livro livroUpdate = livroService.update(id,novoLivro);
+		if(livroUpdate != null) {
+			 return new ResponseEntity<>(livroUpdate, HttpStatus.OK);
+		}
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Livro> deletaAluno(@PathVariable Integer id) {
-		return new ResponseEntity<>(HttpStatus.OK);
-	}	
+	public ResponseEntity<Livro> deletaPerfil(@PathVariable Integer id) {
+		Livro livroDeletado = livroService.findById(id);
+
+		if (livroDeletado == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		livroService.delete(id);
+		return new ResponseEntity<>(livroDeletado, HttpStatus.OK);
+	}
 	
 }

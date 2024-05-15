@@ -25,8 +25,21 @@ public class LivroService {
 		return livroRepository.save(livro);
 	}
 	
-	public Livro update(Livro livro) {
-        return livroRepository.save(livro);
+	public Livro update(Integer idLivroAtual,Livro novoLivro) {
+		Livro livroAtual = livroRepository.findById(idLivroAtual).orElse(null);
+		if(livroAtual != null) {
+			try {
+				livroAtual.setNome_livro(novoLivro.getNome_livro());
+				livroAtual.setNome_autor(novoLivro.getNome_autor());
+				livroAtual.setData_lancamento(novoLivro.getData_lancamento());
+				livroAtual.setCodigo_isbn(novoLivro.getCodigo_isbn());
+				livroAtual.setEditora(novoLivro.getEditora());
+				livroRepository.save(livroAtual);
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
+        return livroAtual;
     }
 	
 	
