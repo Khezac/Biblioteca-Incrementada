@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.org.serratec.projetobiblioteca.bibliotecaincrementada.entities.Livro;
 import br.org.serratec.projetobiblioteca.bibliotecaincrementada.entities.Perfil;
 import br.org.serratec.projetobiblioteca.bibliotecaincrementada.services.PerfilService;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/perfil")
@@ -41,7 +42,7 @@ public class PerfilController {
 	}
 
 	@PostMapping
-	public ResponseEntity<Perfil> save(@RequestBody Perfil perfil) {
+	public ResponseEntity<Perfil> save(@RequestBody @Valid Perfil perfil) {
 		return new ResponseEntity<>(perfilService.save(perfil), HttpStatus.CREATED);
 	}
 

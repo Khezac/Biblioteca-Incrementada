@@ -13,6 +13,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "perfil")
@@ -29,9 +31,11 @@ public class Perfil {
 	private Integer perfilId;
 
 	@Column(name = "nome")
+	@NotBlank
 	private String nome;
 
 	@Column(name = "descricao")
+	@NotBlank
 	private String descricao;
 
 	@OneToMany(mappedBy = "perfil", fetch = FetchType.EAGER)
