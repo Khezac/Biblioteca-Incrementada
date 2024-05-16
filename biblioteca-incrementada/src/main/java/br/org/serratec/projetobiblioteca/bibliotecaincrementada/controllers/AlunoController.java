@@ -15,9 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.org.serratec.projetobiblioteca.bibliotecaincrementada.entities.Aluno;
-import br.org.serratec.projetobiblioteca.bibliotecaincrementada.entities.Livro;
-import br.org.serratec.projetobiblioteca.bibliotecaincrementada.entities.Perfil;
 import br.org.serratec.projetobiblioteca.bibliotecaincrementada.services.AlunoService;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/aluno")
@@ -45,12 +44,12 @@ public class AlunoController {
 	}
 
 	@PostMapping
-	public ResponseEntity<Aluno> save(@RequestBody Aluno aluno) {
+	public ResponseEntity<Aluno> save(@Valid @RequestBody Aluno aluno) {
 		return new ResponseEntity<>(alunoService.save(aluno), HttpStatus.CREATED) ;
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Aluno>update(@PathVariable Integer id, @RequestBody Aluno novoAluno){
+	public ResponseEntity<Aluno>update(@PathVariable Integer id, @Valid @RequestBody Aluno novoAluno){
 		Aluno alunoUpdate = alunoService.update(id,novoAluno);
 		if(alunoUpdate != null) {
 			 return new ResponseEntity<>(alunoUpdate, HttpStatus.OK);
