@@ -13,6 +13,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "livro")
@@ -29,19 +32,25 @@ public class Livro {
 	private Integer livro_id;
 	
 	@Column(name = "nome_livro")
+	@NotBlank
 	private String nome_livro;
 	
 	@Column(name = "nome_autor")
+	@NotBlank
 	private String nome_autor;
 	
 	@Column(name = "data_lancamento")
+	@NotNull
 	private LocalDate data_lancamento;
 	
 	@Column(name = "codigo_isbn")
+	@Min(value = 1)
+	@NotNull
 	private Integer codigo_isbn;
 	
 	@ManyToOne
 	@JoinColumn(name="editora_id", referencedColumnName="editora_id")
+	@NotNull
 	private Editora editora;
 	
 	public Livro() {
