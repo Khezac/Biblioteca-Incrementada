@@ -13,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "editora")
@@ -29,15 +30,19 @@ public class Editora {
 	private Integer editora_id;
 	
 	@Column(name = "nome")
+	@NotBlank
 	private String nome;
 
 	@Column(name = "imagem_nome")
+	@NotBlank
 	private String imagem_nome;
 	
 	@Column(name = "imagem_filename")
+	@NotBlank
 	private String imagem_filename;
 
 	@Column(name = "imagem_url")
+	@NotBlank
 	private String imagem_url;
 	
 	@OneToMany(mappedBy = "editora", fetch = FetchType.EAGER)

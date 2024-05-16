@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.org.serratec.projetobiblioteca.bibliotecaincrementada.entities.Editora;
 import br.org.serratec.projetobiblioteca.bibliotecaincrementada.entities.Livro;
 import br.org.serratec.projetobiblioteca.bibliotecaincrementada.services.EditoraService;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/editora")
@@ -40,7 +41,7 @@ public class EditoraController {
 	}
 
 	@PostMapping
-	public ResponseEntity<Editora> save(@RequestBody Editora editora) {
+	public ResponseEntity<Editora> save(@RequestBody @Valid Editora editora) {
 		return new ResponseEntity<>(editoraService.save(editora), HttpStatus.CREATED);
 	}
 
