@@ -14,10 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.org.serratec.projetobiblioteca.bibliotecaincrementada.entities.Livro;
-import br.org.serratec.projetobiblioteca.bibliotecaincrementada.entities.Perfil;
 import br.org.serratec.projetobiblioteca.bibliotecaincrementada.entities.Usuario;
 import br.org.serratec.projetobiblioteca.bibliotecaincrementada.services.UsuarioService;
+import jakarta.validation.Valid;
 
 
 @RestController
@@ -42,7 +41,7 @@ public class UsuarioController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Usuario>save(@RequestBody Usuario usuario){
+	public ResponseEntity<Usuario>save(@Valid @RequestBody Usuario usuario){
 		return new ResponseEntity<>(usuarioService.save(usuario), HttpStatus.CREATED);
 	}
 	

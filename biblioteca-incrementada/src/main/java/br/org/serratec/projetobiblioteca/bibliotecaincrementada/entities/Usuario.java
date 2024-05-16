@@ -11,6 +11,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table (name = "usuario")
@@ -27,16 +31,21 @@ public class Usuario {
 	private Integer user_id; 
 	
 	@Column(name = "user_nome")
+	@NotBlank
 	private String user_nome;
 	
 	@Column(name = "user_email")
+	@Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}")
 	private String user_email;
 	
 	@Column(name = "user_password")
+	@NotBlank
+	@Size(min = 4, max = 12)
 	private String user_password;
 	
 	@ManyToOne
 	@JoinColumn(name="perfil_id", referencedColumnName="perfil_id")
+	@NotNull
 	private Perfil perfil;
 
 	public Usuario() {
