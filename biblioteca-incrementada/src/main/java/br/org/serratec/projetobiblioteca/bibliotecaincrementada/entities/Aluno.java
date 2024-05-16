@@ -10,6 +10,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "aluno")
@@ -21,27 +24,34 @@ public class Aluno {
 	private Integer aluno_matricula;
 
 	@Column(name = "nome")
+	@NotEmpty
 	private String nome;
 
 	@Column(name = "data_nascimento")
+	@NotNull
 	private LocalDate data_nascimento;
 
 	@Column(name = "cpf")
+	@NotBlank
 	private String cpf;
 
 	@Column(name = "logradouro")
+	@NotEmpty
 	private String logradouro;
 
 	@Column(name = "numero_logradouro")
+	@NotBlank
 	private String numero_logradouro;
 
 	@Column(name = "complemento")
 	private String complemento;
 
 	@Column(name = "bairro")
+	@NotEmpty
 	private String bairro;
 
 	@Column(name = "cidade")
+	@NotEmpty
 	private String cidade;
 	
 	@OneToMany(mappedBy = "aluno")
