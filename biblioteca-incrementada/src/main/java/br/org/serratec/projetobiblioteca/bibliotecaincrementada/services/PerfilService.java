@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.org.serratec.projetobiblioteca.bibliotecaincrementada.entities.Livro;
 import br.org.serratec.projetobiblioteca.bibliotecaincrementada.entities.Perfil;
 import br.org.serratec.projetobiblioteca.bibliotecaincrementada.repositories.PerfilRepository;
 
@@ -25,8 +26,18 @@ public class PerfilService {
 		return perfilRepository.save(perfil);
 	}
 	
-	public Perfil update(Perfil perfil) {
-        return perfilRepository.save(perfil);
+	public Perfil update(Integer id,Perfil novoPerfil) {
+		Perfil perfilAtual = perfilRepository.findById(id).orElse(null);
+		if(perfilAtual != null) {
+			try {
+				perfilAtual.setNome(novoPerfil.getNome());
+				perfilAtual.setDescricao(novoPerfil.getDescricao());
+				perfilRepository.save(perfilAtual);
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
+        return perfilAtual;
     }
 	
 	

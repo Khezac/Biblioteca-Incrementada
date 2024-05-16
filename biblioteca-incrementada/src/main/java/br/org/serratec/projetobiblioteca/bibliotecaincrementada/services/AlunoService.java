@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.org.serratec.projetobiblioteca.bibliotecaincrementada.entities.Aluno;
+import br.org.serratec.projetobiblioteca.bibliotecaincrementada.entities.Livro;
 import br.org.serratec.projetobiblioteca.bibliotecaincrementada.repositories.AlunoRepository;
 
 @Service
@@ -43,9 +44,25 @@ public class AlunoService {
 		return alunoRepository.save(aluno);
 	}
 
-	public Aluno update(Aluno aluno) { 
-		return alunoRepository.save(aluno);
-	}
+	public Aluno update(Integer id,Aluno novoAluno) {
+		Aluno alunoAtual = alunoRepository.findById(id).orElse(null);
+		if(alunoAtual != null) {
+			try {
+				alunoAtual.setNome(novoAluno.getNome());
+				alunoAtual.setData_nascimento(novoAluno.getData_nascimento());
+				alunoAtual.setCpf(novoAluno.getCpf());
+				alunoAtual.setLogradouro(novoAluno.getLogradouro());
+				alunoAtual.setNumero_logradouro(novoAluno.getNumero_logradouro());
+				alunoAtual.setComplemento(novoAluno.getComplemento());
+				alunoAtual.setBairro(novoAluno.getBairro());
+				alunoAtual.setCidade(novoAluno.getCidade());
+				alunoRepository.save(alunoAtual);
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
+        return alunoAtual;
+    }
 
 	public Aluno deleteById(Integer id) {
 		Aluno alunoDeletado = alunoRepository.findById(id).orElse(null);
@@ -59,17 +76,5 @@ public class AlunoService {
 		}
 		return alunoDeletado;
 	}
-	
-	public Aluno deleteUsuario(Aluno aluno) {
-		Aluno alunoDeletado = alunoRepository.findById(aluno.getAluno_matricula()).orElse(null);
-		if(alunoDeletado != null) {
-			try {
-				alunoRepository.delete(aluno);
-				return alunoDeletado;
-			} catch(Exception e) {
-				System.out.println(e);
-			}
-		}
-		return alunoDeletado;
-	}
+
 }

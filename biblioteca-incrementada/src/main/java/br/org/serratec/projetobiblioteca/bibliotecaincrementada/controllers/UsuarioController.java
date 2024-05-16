@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.org.serratec.projetobiblioteca.bibliotecaincrementada.entities.Livro;
 import br.org.serratec.projetobiblioteca.bibliotecaincrementada.entities.Perfil;
 import br.org.serratec.projetobiblioteca.bibliotecaincrementada.entities.Usuario;
 import br.org.serratec.projetobiblioteca.bibliotecaincrementada.services.UsuarioService;
@@ -45,10 +46,14 @@ public class UsuarioController {
 		return new ResponseEntity<>(usuarioService.save(usuario), HttpStatus.CREATED);
 	}
 	
-	@PutMapping
-	public ResponseEntity<Usuario>update(@RequestBody Usuario usuario){
-		return new ResponseEntity<>(usuarioService.save(usuario),HttpStatus.OK);
-	}
+	@PutMapping("/{id}")
+	public ResponseEntity<Usuario>update(@PathVariable Integer id, @RequestBody Usuario novoUsuario){
+		Usuario usuarioUpdate = usuarioService.update(id,novoUsuario);
+		if(usuarioUpdate != null) {
+			 return new ResponseEntity<>(usuarioUpdate, HttpStatus.OK);
+		}
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Usuario> delete(@PathVariable Integer id) {

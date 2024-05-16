@@ -33,7 +33,7 @@ public class Aluno {
 	private String logradouro;
 
 	@Column(name = "numero_logradouro")
-	private Integer numero_logradouro;
+	private String numero_logradouro;
 
 	@Column(name = "complemento")
 	private String complemento;
@@ -67,12 +67,12 @@ public class Aluno {
 		this.nome = nome;
 	}
 
-	public LocalDate getdat_anascimento() {
+	public LocalDate getData_nascimento() {
 		return data_nascimento;
 	}
 
-	public void setdat_anascimento(LocalDate dat_anascimento) {
-		this.data_nascimento = dat_anascimento;
+	public void setData_nascimento(LocalDate data_nascimento) {
+		this.data_nascimento = data_nascimento;
 	}
 
 	public String getCpf() {
@@ -91,11 +91,11 @@ public class Aluno {
 		this.logradouro = logradouro;
 	}
 
-	public Integer getNumero_logradouro() {
+	public String getNumero_logradouro() {
 		return numero_logradouro;
 	}
 
-	public void setNumero_logradouro(Integer numero_logradouro) {
+	public void setNumero_logradouro(String numero_logradouro) {
 		this.numero_logradouro = numero_logradouro;
 	}
 

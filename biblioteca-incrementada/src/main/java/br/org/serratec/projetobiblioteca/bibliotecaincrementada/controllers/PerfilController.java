@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.org.serratec.projetobiblioteca.bibliotecaincrementada.entities.Livro;
 import br.org.serratec.projetobiblioteca.bibliotecaincrementada.entities.Perfil;
 import br.org.serratec.projetobiblioteca.bibliotecaincrementada.services.PerfilService;
 
@@ -44,10 +45,14 @@ public class PerfilController {
 		return new ResponseEntity<>(perfilService.save(perfil), HttpStatus.CREATED);
 	}
 
-	@PutMapping
-	public ResponseEntity<Perfil> update(@RequestBody Perfil perfil) {
-		return new ResponseEntity<>(perfilService.update(perfil), HttpStatus.OK);
-	}
+	@PutMapping("/{id}")
+	public ResponseEntity<Perfil>update(@PathVariable Integer id, @RequestBody Perfil novoPerfil){
+		Perfil perfilUpdate = perfilService.update(id,novoPerfil);
+		if(perfilUpdate != null) {
+			 return new ResponseEntity<>(perfilUpdate, HttpStatus.OK);
+		}
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Perfil> deletaPerfil(@PathVariable Integer id) {

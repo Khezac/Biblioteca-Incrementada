@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.org.serratec.projetobiblioteca.bibliotecaincrementada.entities.Editora;
+import br.org.serratec.projetobiblioteca.bibliotecaincrementada.entities.Livro;
 import br.org.serratec.projetobiblioteca.bibliotecaincrementada.services.EditoraService;
 
 @RestController
@@ -43,10 +44,14 @@ public class EditoraController {
 		return new ResponseEntity<>(editoraService.save(editora), HttpStatus.CREATED);
 	}
 
-	@PutMapping
-	public ResponseEntity<Editora> update(@RequestBody Editora editora) {
-		return new ResponseEntity<>(editoraService.update(editora), HttpStatus.OK);
-	}
+	@PutMapping("/{id}")
+	public ResponseEntity<Editora>update(@PathVariable Integer id, @RequestBody Editora novaEditora){
+		Editora editoraUpdate = editoraService.update(id,novaEditora);
+		if(editoraUpdate != null) {
+			 return new ResponseEntity<>(editoraUpdate, HttpStatus.OK);
+		}
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Editora> deletaEditora(@PathVariable Integer id) {

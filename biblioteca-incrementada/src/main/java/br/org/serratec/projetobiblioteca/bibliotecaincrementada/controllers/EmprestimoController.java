@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.org.serratec.projetobiblioteca.bibliotecaincrementada.entities.Emprestimo;
+import br.org.serratec.projetobiblioteca.bibliotecaincrementada.entities.Perfil;
 import br.org.serratec.projetobiblioteca.bibliotecaincrementada.services.EmprestimoService;
 
 @RestController
@@ -44,12 +45,17 @@ public class EmprestimoController {
 	public ResponseEntity<Emprestimo> save(@RequestBody Emprestimo emprestimo) {
 		return new ResponseEntity<>(emprestimoService.save(emprestimo), HttpStatus.CREATED);
 	}
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<Emprestimo> update(@PathVariable Integer id, @RequestBody Emprestimo novoEmprestimo){
+		Emprestimo emprestimoUpdate = emprestimoService.update(id,novoEmprestimo);
+		if(emprestimoUpdate != null) {
+			 return new ResponseEntity<>(emprestimoUpdate, HttpStatus.OK);
+		}
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 
-	@PutMapping
-	public ResponseEntity<Emprestimo> update(@RequestBody Emprestimo emprestimo) {
-		return new ResponseEntity<>(emprestimoService.update(emprestimo), HttpStatus.OK);
-	}
-
+	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Emprestimo> deletaEmprestimo(@PathVariable Integer id) {
 		Emprestimo emprestimoDeletado = emprestimoService.findById(id);
@@ -58,6 +64,6 @@ public class EmprestimoController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		emprestimoService.delete(id);
-		return new ResponseEntity<>(HttpStatus.OK);
+		return new ResponseEntity<>(emprestimoDeletado,HttpStatus.OK);
 	}
 }

@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.org.serratec.projetobiblioteca.bibliotecaincrementada.entities.Aluno;
+import br.org.serratec.projetobiblioteca.bibliotecaincrementada.entities.Livro;
+import br.org.serratec.projetobiblioteca.bibliotecaincrementada.entities.Perfil;
 import br.org.serratec.projetobiblioteca.bibliotecaincrementada.services.AlunoService;
 
 @RestController
@@ -47,14 +49,23 @@ public class AlunoController {
 		return new ResponseEntity<>(alunoService.save(aluno), HttpStatus.CREATED) ;
 	}
 	
-	@PutMapping
-	public ResponseEntity<Aluno>update(@RequestBody Aluno aluno){
-        return new ResponseEntity<>(alunoService.update(aluno), HttpStatus.OK);
+	@PutMapping("/{id}")
+	public ResponseEntity<Aluno>update(@PathVariable Integer id, @RequestBody Aluno novoAluno){
+		Aluno alunoUpdate = alunoService.update(id,novoAluno);
+		if(alunoUpdate != null) {
+			 return new ResponseEntity<>(alunoUpdate, HttpStatus.OK);
+		}
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Aluno> deletaAluno(@PathVariable Integer id) {
-		return new ResponseEntity<>(HttpStatus.OK);
-	}	
-	
+		Aluno alunoDeletado = alunoService.findById(id);
+
+		if (alunoDeletado == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		alunoService.deleteById(id);
+		return new ResponseEntity<>(alunoDeletado, HttpStatus.OK);
+	}
 }
