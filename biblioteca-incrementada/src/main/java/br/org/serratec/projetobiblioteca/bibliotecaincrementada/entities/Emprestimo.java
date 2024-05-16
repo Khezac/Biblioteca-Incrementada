@@ -10,6 +10,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 @Entity
 @Table(name = "emprestimo")
@@ -23,12 +27,15 @@ public class Emprestimo {
 	@Column(name = "livro_id")
 	private int livro_Id;
 	
+	@NotNull @FutureOrPresent
 	@Column(name = "data_emprestimo")
 	private LocalDate data_emprestimo;
 	
+	@NotNull @Future
 	@Column(name = "data_entrega")
 	private LocalDate data_entrega;
 	
+	@NotNull @Positive
 	@Column(name = "valor_emprestimo")
 	private Float valor_emprestimo;
 	
@@ -38,6 +45,17 @@ public class Emprestimo {
 	
 
 	public Emprestimo() {
+	}
+	
+
+	public Emprestimo(Integer emprestimo_id, int livro_Id, LocalDate data_emprestimo, LocalDate data_entrega,
+			Float valor_emprestimo, Aluno aluno) {
+		this.emprestimo_id = emprestimo_id;
+		this.livro_Id = livro_Id;
+		this.data_emprestimo = data_emprestimo;
+		this.data_entrega = data_entrega;
+		this.valor_emprestimo = valor_emprestimo;
+		this.aluno = aluno;
 	}
 
 

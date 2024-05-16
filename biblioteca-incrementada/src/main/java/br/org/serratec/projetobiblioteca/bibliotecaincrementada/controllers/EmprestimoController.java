@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.org.serratec.projetobiblioteca.bibliotecaincrementada.entities.Emprestimo;
 import br.org.serratec.projetobiblioteca.bibliotecaincrementada.entities.Perfil;
 import br.org.serratec.projetobiblioteca.bibliotecaincrementada.services.EmprestimoService;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/emprestimo")
@@ -42,12 +43,12 @@ public class EmprestimoController {
 	}
 
 	@PostMapping
-	public ResponseEntity<Emprestimo> save(@RequestBody Emprestimo emprestimo) {
+	public ResponseEntity<Emprestimo> save(@RequestBody @Valid Emprestimo emprestimo) {
 		return new ResponseEntity<>(emprestimoService.save(emprestimo), HttpStatus.CREATED);
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Emprestimo> update(@PathVariable Integer id, @RequestBody Emprestimo novoEmprestimo){
+	public ResponseEntity<Emprestimo> update(@PathVariable Integer id, @RequestBody @Valid Emprestimo novoEmprestimo){
 		Emprestimo emprestimoUpdate = emprestimoService.update(id,novoEmprestimo);
 		if(emprestimoUpdate != null) {
 			 return new ResponseEntity<>(emprestimoUpdate, HttpStatus.OK);
